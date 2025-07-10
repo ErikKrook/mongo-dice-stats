@@ -1,2 +1,9 @@
+# Ignore Python virtual environments
 venv/
+
+# Ignore environment variable files
 .env
+
+# Parquet or data exports (optional)
+*.parquet
+*.csv
