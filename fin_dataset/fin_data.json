@@ -24,20 +24,20 @@
             "primary_key":"fin_0",
             "event":"fin",
             "dice_rolls":[
-                1,
-                4,
                 6,
-                3
+                1,
+                1,
+                4
             ]
         },
         {
             "primary_key":"fin_1",
             "event":"fin",
             "dice_rolls":[
-                6,
-                4,
-                6,
-                2
+                5,
+                1,
+                1,
+                4
             ]
         },
         {
@@ -46,8 +46,8 @@
             "dice_rolls":[
                 1,
                 2,
-                6,
-                3
+                2,
+                1
             ]
         }
     ]

@@ -9,11 +9,6 @@ mongo_uri = os.getenv("MONGO_URI")
 # Create a new client and connect to the server
 client = MongoClient(mongo_uri)
 
-try:
-    client.admin.command('ping')
-    print("Pinged your deployment. You successfully connected to MongoDB!")
-except Exception as e:
-    print(e)
 
 # Our staging area
 staging_area = client["dice_staging"]
@@ -24,7 +19,7 @@ target_area = client["dice_analytics"]
 # The fileds we want to project
 project = {
     "$project": {
-        "_id":1,
+        "_id":0,
         "primary_key": 1,
         "event": 1,
         "sum_of_rolls": { "$sum": "$dice_rolls" },
@@ -39,7 +34,7 @@ merge = {
             "db": "dice_analytics",
             "coll": "all_rolls"
         },
-        "on": "_id",
+        "on": "primary_key",
         "whenMatched": "merge",  # update existing
         "whenNotMatched": "insert"  # insert new
     }
