@@ -2,10 +2,6 @@
     "schema":{
         "fields":[
             {
-                "name":"index",
-                "type":"integer"
-            },
-            {
                 "name":"primary_key",
                 "type":"string"
             },
@@ -19,42 +15,39 @@
             }
         ],
         "primaryKey":[
-            "index"
+            "primary_key"
         ],
         "pandas_version":"1.4.0"
     },
     "data":[
         {
-            "index":0,
             "primary_key":"swe_0",
             "event":"swe",
             "dice_rolls":[
+                3,
+                2,
                 5,
+                6
+            ]
+        },
+        {
+            "primary_key":"swe_1",
+            "event":"swe",
+            "dice_rolls":[
+                6,
                 3,
                 1,
                 6
             ]
         },
         {
-            "index":1,
-            "primary_key":"swe_1",
-            "event":"swe",
-            "dice_rolls":[
-                4,
-                1,
-                4,
-                6
-            ]
-        },
-        {
-            "index":2,
             "primary_key":"swe_2",
             "event":"swe",
             "dice_rolls":[
+                3,
                 2,
-                2,
-                4,
-                2
+                6,
+                5
             ]
         }
     ]

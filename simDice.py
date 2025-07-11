@@ -49,6 +49,8 @@ for event in events:
 
     event_dataset = f"{event_folder}/{event}_data.json"
 
+    # Set our primary key as index
+    df.set_index('primary_key', inplace=True)
     # Write to JSON dataset 
     df.to_json(event_dataset, orient='table', indent=4)
 

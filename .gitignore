@@ -7,3 +7,4 @@ venv/
 # Parquet or data exports (optional)
 *.parquet
 *.csv
+
