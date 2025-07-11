@@ -57,3 +57,6 @@ for event in events:
 
     print(f"Dataset written to: {output_dir}")
 
+# Close the connection
+client.close()
+

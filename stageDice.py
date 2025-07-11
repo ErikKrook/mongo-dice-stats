@@ -6,8 +6,6 @@ from pymongoarrow.api import write
 import json
 from pymongoarrow.monkey import patch_all
 
-patch_all()
-
 load_dotenv()  # loads the .env file
 
 mongo_uri = os.getenv("MONGO_URI")
@@ -16,7 +14,9 @@ mongo_uri = os.getenv("MONGO_URI")
 client = MongoClient(mongo_uri)
 
 # Our staging area
-stating_area = client["dice_staging"]
+staging_area = client["dice_staging"]
+
+patch_all()
 
 # List of all the events
 events = ["swe", "den", "nor", "fin", "ice"]
@@ -38,10 +38,13 @@ for event in events:
 
     # Truncate the staging table before inserting
 
-    stating_area[collection].delete_many({})    
+    staging_area[collection].delete_many({})    
 
     # Insert with pymongoarrow
-    write(stating_area[collection], df)
+    write(staging_area[collection], df)
 
     print(f"Data inserted successfully into {collection}")
+
+# Close the connection
+client.close()
 
