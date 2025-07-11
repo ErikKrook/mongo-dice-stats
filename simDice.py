@@ -1,22 +1,17 @@
 import random
-import pyarrow as pa
-import pyarrow.dataset as ds
+import pandas as pd
 import os
 import shutil
 
-# Define the Arrow schema: primary_key and event are strings, dice_rolls is a list of integers
-schema = pa.schema([
-    ("primary_key", pa.string()),
-    ("event", pa.string()),
-    ("dice_rolls", pa.list_(pa.int64()))
-])
+
 
 # List of event tags
 events = ["swe", "den", "nor", "fin", "ice"]
 
 # Loop over each event
 for event in events:
-    dataset = []  # Container to hold all documents for this event
+
+    dataset = []
 
     # Simulate tests (dice rolls) per event
     for test in range(3):
@@ -27,22 +22,23 @@ for event in events:
         primary_key = f"{event}_{test}"
 
         # Construct the document with the required fields
-        document = {
+        
+        dataset.append({
             "primary_key": primary_key,
             "event": event,
             "dice_rolls": dice_rolls
-        }
+            })
 
         # Add the document to the dataset list
-        dataset.append(document)
+        
 
     # Convert list of dicts to an Arrow Table using the predefined schema
-    table = pa.Table.from_pylist(dataset, schema=schema)
+    df = pd.DataFrame(dataset)
 
-    event_dataset = f"{event}_dataset"
+    event_folder = f"{event}_dataset"
 
     # Define output directory in the current folder
-    output_dir = os.path.join(os.getcwd(), event_dataset)  
+    output_dir = os.path.join(os.getcwd(), event_folder)  
 
     # Remove folder if it already exits
     if os.path.exists(output_dir):
@@ -51,12 +47,11 @@ for event in events:
     # Create a new folder for our dataset 
     os.makedirs(output_dir, exist_ok=True)
 
-    # Write to Parquet dataset 
-    ds.write_dataset(
-        table,
-        base_dir=output_dir,
-        format="parquet"
-    )
+    event_dataset = f"{event_folder}/{event}_data.json"
+
+    # Write to JSON dataset 
+    df.to_json(event_dataset, orient='table', indent=4)
+
 
     print(f"Dataset written to: {output_dir}")
 
