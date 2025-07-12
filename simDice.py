@@ -14,7 +14,7 @@ for event in events:
     dataset = []
 
     # Simulate tests (dice rolls) per event
-    for test in range(3):
+    for test in range(400):
         # Generate 4 random dice rolls (1-6)
         dice_rolls = [random.randint(1, 6) for _ in range(4)]
 
